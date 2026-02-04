@@ -8,7 +8,9 @@ if ! grep -q "nanotpl()" ~/.bashrc; then
 
     cat << "EOF" >> ~/.bashrc
 
-    nanotpl(){
+nanotpl(){
+
+    if [ "$#" -ge 2 ]; then
 
         if [ -f "$HOME/.nano_templates/$2.tpl" ]; then
 
@@ -22,7 +24,12 @@ if ! grep -q "nanotpl()" ~/.bashrc; then
 
         fi
 
-    }
+    else
+
+        echo "Usage: nanotpl <filename> <template_type>"
+
+    fi
+}
 
 EOF
 
