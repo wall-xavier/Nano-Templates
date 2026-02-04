@@ -1,0 +1,31 @@
+#!/bin/bash
+
+mkdir -p ~/.nano_templates/
+
+cp *.tpl ~/.nano_templates/
+
+if ! grep -q "nanotpl()" ~/.bashrc; then 
+
+    cat << "EOF" >> ~/.bashrc
+
+    nanotpl(){
+
+        if [ -f "$HOME/.nano_templates/$2.tpl" ]; then
+
+            cp "$HOME/.nano_templates/$2.tpl" "$1"
+
+            nano "$1"
+
+        else
+
+            echo "Template for .$2 files not found!"
+
+        fi
+
+    }
+
+EOF
+
+fi
+
+echo "Now run source ~/.bashrc to use the command"
